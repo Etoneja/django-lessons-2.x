@@ -6,8 +6,12 @@
 
 {% block content %}
 <h4 class="mb-4">Posts with "{{ tag.title }}" tag</h4>
-{% for post in tag.posts.all %}
-    {% include 'blog/includes/post_card.html' with post=post %}
-{% endfor %}
+{% if tag.posts.exists %}
+    {% for post in tag.posts.all %}
+        {% include 'blog/includes/post_card.html' with post=post %}
+    {% endfor %}
+{% else %}
+    No posts for tag
+{% endif %}
 
 {% endblock %}

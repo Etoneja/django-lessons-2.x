@@ -1,6 +1,11 @@
-from django.views.generic import DetailView, ListView
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views.generic import (
+    DetailView, ListView, CreateView, View
+)
 
 from . import models
+from . import forms
 
 
 class PostListView(ListView):
@@ -24,3 +29,13 @@ class TagsListView(ListView):
 class TagDetailsView(DetailView):
     model = models.Tag
     template_name = "blog/tag_details.html"
+
+
+class TagCreateView(CreateView):
+    form_class = forms.TagForm
+    template_name = "blog/tag_form.html"
+
+
+class PostCreateView(CreateView):
+    form_class = forms.PostForm
+    template_name = "blog/post_form.html"
