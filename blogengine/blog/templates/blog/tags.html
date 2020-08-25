@@ -6,7 +6,7 @@
 
 {% block content %}
 <h4>Tags</h4>
-{% for tag in tags %}
+{% for tag in tag_list %}
 <ul class="list-group">
     <li><a class="list-item" href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></li>
 </ul>
