@@ -10,7 +10,7 @@ def posts_list(request):
     context = {
         "posts": posts
     }
-    return render(request, "blog/index.html", context=context)
+    return render(request, "blog/posts.html", context=context)
 
 
 def post_details(request, slug):
@@ -18,4 +18,20 @@ def post_details(request, slug):
     context = {
         "post": post
     }
-    return render(request, "blog/details.html", context=context)
+    return render(request, "blog/post_details.html", context=context)
+
+
+def tags_list(request):
+    tags = models.Tag.objects.all()
+    context = {
+        "tags": tags
+    }
+    return render(request, "blog/tags.html", context=context)
+
+
+def tag_details(request, slug):
+    tag = get_object_or_404(models.Tag, slug=slug)
+    context = {
+        "tag": tag
+    }
+    return render(request, "blog/tag_details.html", context=context)
