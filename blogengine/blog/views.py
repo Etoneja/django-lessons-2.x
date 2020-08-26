@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     DetailView, ListView,
     CreateView, UpdateView,
@@ -11,9 +12,7 @@ from . import forms
 
 class PostListView(ListView):
     model = models.Post
-
-    def get_queryset(self):
-        return self.model.objects.order_by("-date_pub")
+    paginate_by = 2
 
 
 class PostDetailsView(DetailView):
@@ -22,37 +21,42 @@ class PostDetailsView(DetailView):
 
 class TagsListView(ListView):
     model = models.Tag
+    paginate_by = 2
 
 
 class TagDetailsView(DetailView):
     model = models.Tag
 
 
-class TagCreateView(CreateView):
+class TagCreateView(LoginRequiredMixin, CreateView):
     model = models.Tag
     form_class = forms.TagForm
 
 
-class TagUpdateView(UpdateView):
+class TagUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Tag
     form_class = forms.TagForm
+    raise_exception = True
 
 
-class TagDeleteView(DeleteView):
+class TagDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Tag
     success_url = reverse_lazy("blog:tags")
+    raise_exception = True
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = models.Post
     form_class = forms.PostForm
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Post
     form_class = forms.PostForm
+    raise_exception = True
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Post
     success_url = reverse_lazy("blog:posts")
+    raise_exception = True

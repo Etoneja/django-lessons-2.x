@@ -7,10 +7,12 @@
 {% block content %}
 <h4 class="mb-4">Posts with "{{ tag.title }}" tag</h4>
 
-<div class="btn-group mr-2" role="group" aria-label="First group">
-    <a type="button" class="btn btn-warning" href="{% url 'blog:tag_update' tag.slug %}">Update</a>
-    <a type="button" class="btn btn-danger" href="{% url 'blog:tag_delete' tag.slug %}">Delete</a>
-</div>
+{% if user.is_authenticated %}
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <a type="button" class="btn btn-warning" href="{% url 'blog:tag_update' tag.slug %}">Update</a>
+        <a type="button" class="btn btn-danger" href="{% url 'blog:tag_delete' tag.slug %}">Delete</a>
+    </div>
+{% endif %}
 <hr>
 {% if tag.posts.exists %}
     {% for post in tag.posts.all %}

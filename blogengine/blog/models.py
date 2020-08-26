@@ -13,6 +13,9 @@ class Post(models.Model):
         "tag", blank=True, related_name="posts"
     )
 
+    class Meta:
+        ordering = ["-date_pub"]
+
     def get_absolute_url(self):
         return reverse("blog:post_details", kwargs={
             "slug": self.slug
@@ -31,6 +34,9 @@ class Tag(models.Model):
 
     title = models.CharField(max_length=50, db_index=True)
     slug = models.SlugField(max_length=50, unique=True)
+
+    class Meta:
+        ordering = ["id"]
 
     def get_absolute_url(self):
         return reverse("blog:tag_details", kwargs={
