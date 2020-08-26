@@ -6,6 +6,13 @@
 
 {% block content %}
 <h4 class="mb-4">{{ post.title }}</h4>
+
+<div class="btn-group mr-2" role="group" aria-label="First group">
+    <a type="button" class="btn btn-warning" href="{% url 'blog:post_update' post.slug %}">Update</a>
+    <a type="button" class="btn btn-danger" href="{% url 'blog:post_delete' post.slug %}">Delete</a>
+</div>
+<hr>
+
 <p>
     {{ post.body }}
 </p>

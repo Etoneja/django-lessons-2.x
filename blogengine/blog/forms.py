@@ -37,7 +37,7 @@ class TagForm(forms.ModelForm):
 
     class Meta:
         model = models.Tag
-        fields = ["title"]
+        fields = ["title", "slug"]
         widgets = {
             "title": forms.TextInput(
                 attrs={"class": "form-control"}

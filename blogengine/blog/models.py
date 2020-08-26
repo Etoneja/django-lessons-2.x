@@ -1,11 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
-from time import time
-
-
-def get_slug(s):
-    return f"{slugify(s)}-{str(int(time()))}"
+from .utils import get_slug
 
 
 class Post(models.Model):
