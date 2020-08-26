@@ -11,6 +11,7 @@ urlpatterns = [
     path("posts/<slug:slug>/update/", views.PostUpdateView.as_view(), name="post_update"),
     path("posts/<slug:slug>/delete/", views.PostDeleteView.as_view(), name="post_delete"),
     path("posts/<slug:slug>/", views.PostDetailsView.as_view(), name="post_details"),
+
     path("tags/", views.TagsListView.as_view(), name="tags"),
     path("tags/create", views.TagCreateView.as_view(), name="tag_create"),
     path("tags/<slug:slug>/update", views.TagUpdateView.as_view(), name="tag_update"),
