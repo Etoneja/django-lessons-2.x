@@ -9,6 +9,7 @@ idna==2.10
 Markdown==3.2.2
 maxminddb==2.0.2
 multidict==4.7.6
+psycopg2==2.8.5
 pytz==2020.1
 requests==2.24.0
 sqlparse==0.3.1
