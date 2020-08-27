@@ -1,10 +1,12 @@
+{% load blog_tags %}
+
 <div class="card mb-2">
   <div class="card-header">
     {{ post.date_pub }}
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ post.title }}</h5>
-    <p class="card-text">{{ post.body|truncatewords:4 }}</p>
+    <p class="card-text">{{ post.body|markdown|truncatewords:4 }}</p>
     <a href="{{ post.get_absolute_url }}" class="btn btn-primary btn-sm">Details</a>
   </div>
   {% if post.tags.exists %}
