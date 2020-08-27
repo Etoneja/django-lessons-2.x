@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 3-rd party
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+
+    # local
     'blog.apps.BlogConfig'
 ]
 
@@ -123,3 +129,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+SITE_ID = 1
