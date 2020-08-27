@@ -19,6 +19,8 @@ urlpatterns = [
     path("tags/<slug:slug>/delete", views.TagDeleteView.as_view(), name="tag_delete"),
     path("tags/<slug:slug>/", views.TagDetailsView.as_view(), name="tag_details"),
 
+    path("search/", views.SearchView.as_view(), name="search"),
+
     path("feed", LatestPostFeed(), name="post_feed")
 
 ]

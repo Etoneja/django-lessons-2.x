@@ -5,7 +5,11 @@
     {{ post.date_pub }}
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{ post.title }}</h5>
+    <h5 class="card-title">{{ post.title }}
+    {% if post.rank %}
+      <small>[rank: {{ post.rank|floatformat:2 }}]</small>
+    {% endif %}
+    </h5>
     <p class="card-text">{{ post.body|markdown|truncatewords:4 }}</p>
     <a href="{{ post.get_absolute_url }}" class="btn btn-primary btn-sm">Details</a>
   </div>

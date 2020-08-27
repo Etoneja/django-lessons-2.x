@@ -1,6 +1,9 @@
-from django.db.models import Q, Count
+from django.db.models import Count
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.postgres.search import (
+    SearchVector, SearchQuery, SearchRank
+)
 from django.views.generic import (
     DetailView, ListView,
     CreateView, UpdateView,
@@ -14,17 +17,6 @@ from . import forms
 class PostListView(ListView):
     model = models.Post
     paginate_by = 2
-
-    def get(self, request, *args, **kwargs):
-        search = request.GET.get("search")
-        if search:
-            self.queryset = self.model.objects.filter(
-                Q(title__icontains=search) | Q(body__icontains=search)
-            ).order_by("-date_pub")
-            self.extra_context = {
-                "search": search
-            }
-        return super().get(request, *args, **kwargs)
 
 
 class PostDetailsView(DetailView):
@@ -78,3 +70,20 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Post
     success_url = reverse_lazy("blog:posts")
     raise_exception = True
+
+
+class SearchView(ListView):
+    model = models.Post
+    template_name = "blog/search.html"
+
+    def get(self, request, *args, **kwargs):
+        search = request.GET.get("search")
+        if search:
+            search_vector = SearchVector("title", "body")
+            search_query = SearchQuery(search)
+            self.queryset = self.model.objects.annotate(
+                search=search_vector,
+                rank=SearchRank(search_vector, search_query)
+            ).filter(search=search_query).order_by("-rank")
+
+        return super().get(request, *args, **kwargs)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Posts
+    Search
 {% endblock %}
 
 {% block search_value %}
@@ -9,18 +9,18 @@
 {% endblock %}
 
 {% block content %}
-<h4 class="mb-4">Posts</h4>
+<h4 class="mb-4">Search</h4>
+
+<div class="alert alert-info" role="alert">
+    Found <b>{{ post_list.count }}</b> posts.
+</div>
 
 {% if post_list.exists %}
     {% for post in post_list %}
         {% include 'blog/includes/post_card.html' with post=post %}
     {% endfor %}
 {% else %}
-    No posts
-{% endif %}
-
-{% if page_obj.has_other_pages %}
-    {% include 'blog/includes/pagination.html' with page_obj=page_obj %}
+    Nothing was found
 {% endif %}
 
 {% endblock %}
