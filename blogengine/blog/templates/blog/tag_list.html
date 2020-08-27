@@ -8,7 +8,10 @@
 <h4>Tags</h4>
 {% for tag in tag_list %}
 <ul class="list-group">
-    <li><a class="list-item" href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></li>
+    <li>
+        <span class="badge badge-pill badge-primary">{{ tag.total_posts }}</span>
+        <a class="list-item" href="{{ tag.get_absolute_url }}">{{ tag.title }} </a>
+    </li>
 </ul>
 {% endfor %}
 

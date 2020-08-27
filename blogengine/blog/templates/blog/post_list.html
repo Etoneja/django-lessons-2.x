@@ -4,13 +4,23 @@
     Posts
 {% endblock %}
 
+{% block search_value %}
+{{ search }}
+{% endblock %}
+
 {% block content %}
 <h4 class="mb-4">Posts</h4>
 
-{% for post in post_list %}
-    {% include 'blog/includes/post_card.html' with post=post %}
-{% endfor %}
+{% if post_list.exists %}
+    {% for post in post_list %}
+        {% include 'blog/includes/post_card.html' with post=post %}
+    {% endfor %}
+{% else %}
+    No posts
+{% endif %}
 
-{% include 'blog/includes/pagination.html' with page_obj=page_obj %}
+{% if page_obj.has_other_pages %}
+    {% include 'blog/includes/pagination.html' with page_obj=page_obj search=search %}
+{% endif %}
 
 {% endblock %}
