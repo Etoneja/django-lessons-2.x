@@ -20,7 +20,7 @@ class PostListView(ListView):
         if search:
             self.queryset = self.model.objects.filter(
                 Q(title__icontains=search) | Q(body__icontains=search)
-            ).order_by("date_pub")
+            ).order_by("-date_pub")
             self.extra_context = {
                 "search": search
             }
